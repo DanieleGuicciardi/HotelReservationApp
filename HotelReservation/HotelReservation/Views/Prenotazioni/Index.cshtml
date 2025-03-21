@@ -3,7 +3,7 @@
 <h2>Elenco Prenotazioni</h2>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">➕ Nuova Prenotazione</a>
+    <button id="btnNuovaPrenotazione" class="btn btn-primary">➕ Nuova Prenotazione</button>
 </p>
 
 <table class="table table-striped">
@@ -17,20 +17,83 @@
             <th>Azioni</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="prenotazioniTable">
         @foreach (var prenotazione in Model)
         {
-            <tr>
+            <tr id="row-@prenotazione.PrenotazioneId">
                 <td>@prenotazione.Cliente.Nome @prenotazione.Cliente.Cognome</td>
                 <td>Camera @prenotazione.Camera.Numero</td>
                 <td>@prenotazione.DataInizio.ToShortDateString()</td>
                 <td>@prenotazione.DataFine.ToShortDateString()</td>
                 <td>@prenotazione.Stato</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@prenotazione.PrenotazioneId" class="btn btn-warning btn-sm">✏️ Modifica</a>
-                    <a asp-action="Delete" asp-route-id="@prenotazione.PrenotazioneId" class="btn btn-danger btn-sm">❌ Elimina</a>
+                    <button class="btn btn-warning btn-sm btnModifica" data-id="@prenotazione.PrenotazioneId">✏️ Modifica</button>
+                    <button class="btn btn-danger btn-sm btnElimina" data-id="@prenotazione.PrenotazioneId">❌ Elimina</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Modale per Modifica e Creazione -->
+<div id="prenotazioneModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Gestione Prenotazione</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Chiudi">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Apre il modale per una nuova prenotazione
+            $("#btnNuovaPrenotazione").click(function () {
+                $.get("/Prenotazioni/Create", function (data) {
+                    $("#modalContent").html(data);
+                    $("#prenotazioneModal").modal("show");
+                });
+            });
+
+            // Apre il modale per modificare una prenotazione
+            $(".btnModifica").click(function () {
+                var id = $(this).data("id");
+                $.get("/Prenotazioni/Edit/" + id, function (data) {
+                    $("#modalContent").html(data);
+                    $("#prenotazioneModal").modal("show");
+                });
+            });
+
+            // Salva la prenotazione via AJAX
+            $(document).on("submit", "#prenotazioneForm", function (e) {
+                e.preventDefault();
+                var form = $(this);
+                $.post(form.attr("action"), form.serialize(), function (response) {
+                    if (response.success) {
+                        location.reload();
+                    } else {
+                        $("#modalContent").html(response);
+                    }
+                });
+            });
+
+            // Elimina una prenotazione via AJAX
+            $(".btnElimina").click(function () {
+                var id = $(this).data("id");
+                if (confirm("Sei sicuro di voler eliminare questa prenotazione?")) {
+                    $.post("/Prenotazioni/Delete/" + id, function () {
+                        $("#row-" + id).fadeOut();
+                    });
+                }
+            });
+        });
+    </script>
+}

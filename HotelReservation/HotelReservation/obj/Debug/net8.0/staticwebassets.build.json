@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rGdMsJeMFGUgSXVkC/Xm3077X3nLQ19CfkyU3dOoPZU=",
+  "Hash": "NgML8QLING6vkOAZ05KPob+qeWRXzzg3SzmL7d2AnMk=",
   "Source": "HotelReservation",
   "BasePath": "_content/HotelReservation",
   "Mode": "Default",
@@ -1333,8 +1333,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "c2tiyv64ts",
-      "Integrity": "pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=",
+      "Fingerprint": "dnt8hzvcfs",
+      "Integrity": "GVUb5sYOxetDjD1nes7bwj8EHl6wfwyGCopqfpo0RWw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -2581,51 +2581,6 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/site.c2tiyv64ts.css",
-      "AssetFile": "D:\\VSCode\\Programmi\\progetti settimanali\\HotelReservationApp\\HotelReservation\\HotelReservation\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "362"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 11:44:36 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "c2tiyv64ts"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "D:\\VSCode\\Programmi\\progetti settimanali\\HotelReservationApp\\HotelReservation\\HotelReservation\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -2636,7 +2591,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "362"
+          "Value": "602"
         },
         {
           "Name": "Content-Type",
@@ -2644,11 +2599,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=\""
+          "Value": "\"GVUb5sYOxetDjD1nes7bwj8EHl6wfwyGCopqfpo0RWw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 21 Mar 2025 11:44:36 GMT"
+          "Value": "Fri, 21 Mar 2025 15:03:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2658,7 +2613,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0="
+          "Value": "sha256-GVUb5sYOxetDjD1nes7bwj8EHl6wfwyGCopqfpo0RWw="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.dnt8hzvcfs.css",
+      "AssetFile": "D:\\VSCode\\Programmi\\progetti settimanali\\HotelReservationApp\\HotelReservation\\HotelReservation\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "602"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GVUb5sYOxetDjD1nes7bwj8EHl6wfwyGCopqfpo0RWw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 21 Mar 2025 15:03:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "dnt8hzvcfs"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GVUb5sYOxetDjD1nes7bwj8EHl6wfwyGCopqfpo0RWw="
         }
       ]
     },

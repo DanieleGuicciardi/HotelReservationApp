@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using HotelReservation.Data;
 using HotelReservation.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace HotelReservation.Controllers
 {
-    [Authorize(Roles = "Admin,Gestore")]
+    [Authorize]
     public class PrenotazioniController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,9 +25,34 @@ namespace HotelReservation.Controllers
         // GET: Prenotazioni
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Prenotazioni.Include(p => p.Camera).Include(p => p.Cliente);
-            return View(await applicationDbContext.ToListAsync());
+            var user = await _userManager.GetUserAsync(User);
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            var prenotazioni = _context.Prenotazioni
+                .Include(p => p.Camera)
+                .Include(p => p.Cliente)
+                .AsQueryable();
+
+            // Se è cliente, mostra solo le sue prenotazioni
+            if (userRoles.Contains("Cliente"))
+            {
+                var cliente = await _context.Clienti.FirstOrDefaultAsync(c => c.Email == user.Email);
+                if (cliente != null)
+                {
+                    prenotazioni = prenotazioni.Where(p => p.ClienteId == cliente.ClienteId);
+                }
+            }
+
+            return View(await prenotazioni.ToListAsync());
         }
+
+        private readonly UserManager<ApplicationUser> _userManager;
+
+public PrenotazioniController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+{
+    _context = context;
+    _userManager = userManager;
+}
 
         // GET: Prenotazioni/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -49,10 +75,20 @@ namespace HotelReservation.Controllers
         }
 
         // GET: Prenotazioni/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["ClienteId"] = new SelectList(_context.Clienti, "ClienteId", "Nome");
-            ViewData["CameraId"] = new SelectList(_context.Camere, "CameraId", "Numero");
+            var camereDisponibili = _context.Camere
+                .Where(c => !_context.Prenotazioni.Any(p =>
+                    p.CameraId == c.CameraId &&
+                    (p.DataInizio <= DateTime.Now && p.DataFine >= DateTime.Now)))
+                .ToList();
+
+            var user = await _userManager.GetUserAsync(User);
+            var cliente = await _context.Clienti.FirstOrDefaultAsync(c => c.Email == user.Email);
+
+            ViewData["ClienteId"] = new SelectList(new[] { cliente }, "ClienteId", "Nome");
+            ViewData["CameraId"] = new SelectList(camereDisponibili, "CameraId", "Numero");
+
             return View();
         }
 
@@ -167,6 +203,27 @@ namespace HotelReservation.Controllers
         private bool PrenotazioneExists(int id)
         {
             return _context.Prenotazioni.Any(e => e.PrenotazioneId == id);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveAjax(Prenotazione prenotazione)
+        {
+            if (ModelState.IsValid)
+            {
+                if (prenotazione.PrenotazioneId == 0)
+                {
+                    _context.Prenotazioni.Add(prenotazione);
+                }
+                else
+                {
+                    _context.Prenotazioni.Update(prenotazione);
+                }
+
+                await _context.SaveChangesAsync();
+                return Json(new { success = true });
+            }
+
+            return PartialView("_PrenotazioneForm", prenotazione);
         }
     }
 }

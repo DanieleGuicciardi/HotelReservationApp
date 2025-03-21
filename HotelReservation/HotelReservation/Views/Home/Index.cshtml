@@ -1,8 +1,43 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Benvenuto in HotelReservation";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4 fw-bold">Benvenuto in HotelReservation</h1>
+    <p class="lead">Gestisci le prenotazioni, le camere e i clienti con facilità.</p>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card shadow">
+            <img src="https://source.unsplash.com/400x250/?hotel" class="card-img-top" alt="Hotel">
+            <div class="card-body text-center">
+                <h5 class="card-title">Gestione Camere</h5>
+                <p class="card-text">Aggiungi, modifica e visualizza tutte le camere disponibili.</p>
+                <a asp-controller="Camere" asp-action="Index" class="btn btn-primary">Vai alle Camere</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow">
+            <img src="https://source.unsplash.com/400x250/?people" class="card-img-top" alt="Clienti">
+            <div class="card-body text-center">
+                <h5 class="card-title">Gestione Clienti</h5>
+                <p class="card-text">Visualizza l'elenco dei clienti registrati nell'hotel.</p>
+                <a asp-controller="Clienti" asp-action="Index" class="btn btn-primary">Vai ai Clienti</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow">
+            <img src="https://source.unsplash.com/400x250/?booking" class="card-img-top" alt="Prenotazioni">
+            <div class="card-body text-center">
+                <h5 class="card-title">Gestione Prenotazioni</h5>
+                <p class="card-text">Crea e visualizza tutte le prenotazioni attive.</p>
+                <a asp-controller="Prenotazioni" asp-action="Index" class="btn btn-primary">Vai alle Prenotazioni</a>
+            </div>
+        </div>
+    </div>
 </div>

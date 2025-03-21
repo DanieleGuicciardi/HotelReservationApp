@@ -1,0 +1,38 @@
+﻿@model HotelReservation.Models.Prenotazione
+
+<form id="prenotazioneForm" asp-action="SaveAjax" method="post">
+    <div class="form-group">
+        <label>Cliente</label>
+        <select asp-for="ClienteId" class="form-control" asp-items="ViewBag.ClienteId">
+            <option value="">-- Seleziona Cliente --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Camera</label>
+        <select asp-for="CameraId" class="form-control" asp-items="ViewBag.CameraId">
+            <option value="">-- Seleziona Camera --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Data Inizio</label>
+        <input asp-for="DataInizio" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Data Fine</label>
+        <input asp-for="DataFine" type="date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Stato</label>
+        <select asp-for="Stato" class="form-control">
+            <option value="Confermata">Confermata</option>
+            <option value="Annullata">Annullata</option>
+            <option value="In attesa">In attesa</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Salva</button>
+</form>
