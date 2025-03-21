@@ -1,0 +1,36 @@
+﻿@model IEnumerable<HotelReservation.Models.Prenotazione>
+
+<h2>Elenco Prenotazioni</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">➕ Nuova Prenotazione</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Camera</th>
+            <th>Data Inizio</th>
+            <th>Data Fine</th>
+            <th>Stato</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prenotazione in Model)
+        {
+            <tr>
+                <td>@prenotazione.Cliente.Nome @prenotazione.Cliente.Cognome</td>
+                <td>Camera @prenotazione.Camera.Numero</td>
+                <td>@prenotazione.DataInizio.ToShortDateString()</td>
+                <td>@prenotazione.DataFine.ToShortDateString()</td>
+                <td>@prenotazione.Stato</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@prenotazione.PrenotazioneId" class="btn btn-warning btn-sm">✏️ Modifica</a>
+                    <a asp-action="Delete" asp-route-id="@prenotazione.PrenotazioneId" class="btn btn-danger btn-sm">❌ Elimina</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

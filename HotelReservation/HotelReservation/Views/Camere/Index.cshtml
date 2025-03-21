@@ -1,0 +1,32 @@
+﻿@model IEnumerable<HotelReservation.Models.Camera>
+
+<h2>Elenco Camere</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">➕ Aggiungi Nuova Camera</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Numero</th>
+            <th>Tipo</th>
+            <th>Prezzo</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var camera in Model)
+        {
+            <tr>
+                <td>@camera.Numero</td>
+                <td>@camera.Tipo</td>
+                <td>@camera.Prezzo.ToString("C")</td> <!-- Formattazione valuta -->
+                <td>
+                    <a asp-action="Edit" asp-route-id="@camera.CameraId" class="btn btn-warning btn-sm">✏️ Modifica</a>
+                    <a asp-action="Delete" asp-route-id="@camera.CameraId" class="btn btn-danger btn-sm">❌ Elimina</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
